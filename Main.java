@@ -1,36 +1,42 @@
+import java.util.ArrayList;
+
 public class Main {
+
+    // Works for ANY Vehicle: the correct displayInfo() is chosen at runtime
+    static void inspect(Vehicle v) {
+        v.displayInfo();
+        System.out.println("      Age: " + v.calculateAge() + " yrs | Vintage: " + v.isVintage());
+        System.out.println();
+    }
 
     public static void main(String[] args) {
 
-        Vehicle vehicle1 = new Vehicle();
-        vehicle1.brand = "Toyota";
-        vehicle1.model = "Corolla";
-        vehicle1.year = 2020;
+        
+        System.out.println("---- Part A: One variable, many forms ----");
+        Vehicle ride = new Car("Toyota", "Corolla", 2020, 4, "Gasoline");
+        inspect(ride);
 
-        Vehicle vehicle2 = new Vehicle();
-        vehicle2.brand = "Honda";
-        vehicle2.model = "Civic";
-        vehicle2.year = 1990;
+        ride = new Motorcycle("Yamaha", "Earox", 2026, 155, "Scooter");
+        inspect(ride);
 
-        Vehicle vehicle3 = new Vehicle();
-        vehicle3.brand = "Ford";
-        vehicle3.model = "Mustang";
-        vehicle3.year = 2015;
+        ride = new Truck("Hino", "300", 2019, 4.5, 2);
+        inspect(ride);
 
-        vehicle1.displayInfo();
-        System.out.println("Age: " + vehicle1.calculateAge());
-        System.out.println("Vintage: " + vehicle1.isVintage());
+        
+        System.out.println("---- Part B: The garage ----");
+        ArrayList<Vehicle> garage = new ArrayList<>();
+        garage.add(new Car("Toyota", "Corolla", 2020, 4, "Gasoline"));
+        garage.add(new Car("BMW", "iX5", 2027, 5, "Gasoline"));
+        garage.add(new Motorcycle("Yamaha", "Earox", 2020, 155, "Scooter"));
+        garage.add(new Truck("Hino", "300", 2019, 4.5, 2));
 
-        System.out.println();
+        for (Vehicle v : garage) {
+            inspect(v);
+        }
 
-        vehicle2.displayInfo();
-        System.out.println("Age: " + vehicle2.calculateAge());
-        System.out.println("Vintage: " + vehicle2.isVintage());
-
-        System.out.println();
-
-        vehicle3.displayInfo();
-        System.out.println("Age: " + vehicle3.calculateAge());
-        System.out.println("Vintage: " + vehicle3.isVintage());
+    
+        System.out.println("---- Part C: Year validation ----");
+        Vehicle odd = new Motorcycle("Test", "Prototype", 1700, 125, "Underbone");
+        inspect(odd);
     }
 }
